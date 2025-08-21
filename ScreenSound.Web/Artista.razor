@@ -1,0 +1,20 @@
+﻿@page "/artista"
+@using ScreenSound.Web.Response
+@using ScreenSound.Web.Services
+@inject ArtistaAPI artistaAPI
+
+<h3>@mensagem</h3>
+@if(artistaResponse is not null)
+{
+    foreach (var a in artistaResponse)
+    {
+        <p>@artistaResponse.Nome</p>
+    }
+}
+
+@code{
+    public string mensagem { get; set; } = "teste";
+    public ICollection<ArtistaResponse>? artistaResponse;
+    protected override async Task OnInitializedAsync() => artistaResponse = await artistaAPI.GetArtistasAsync();
+
+}

@@ -14,5 +14,11 @@
     <MudMainContent>
         @Body
     </MudMainContent>
+    
 </MudLayout>
-
+@code {
+    private MudTheme currentTheme = new MudTheme()
+    {
+        Palette = ScreendsoundPallete.CreatePallete
+    };
+}

@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Graph;
+using Microsoft.Graph.Models;
 using ScreenSound.Banco;
 using ScreenSound.Modelos;
+using ScreenSound.Web.Pages;
 using ScreenSound.Web.Requests;
 using ScreenSound.Web.Response;
 
@@ -10,7 +13,7 @@ public static class ArtistasExtensions
 {
     public static void AddEndPointsArtistas(this WebApplication app)
     {
-
+        
         #region Endpoint Artistas
         app.MapGet("/Artistas", ([FromServices] DAL<Artista> dal) =>
         {

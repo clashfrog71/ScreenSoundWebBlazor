@@ -14,5 +14,6 @@ builder.Services.AddMudServices();
 builder.Services.AddHttpClient("API", client => {
     client.BaseAddress = new Uri(builder.Configuration["APIServer:Url"]!);
     client.DefaultRequestHeaders.Add("Accept", "application/json");
+
 });
  

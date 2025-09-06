@@ -16,5 +16,5 @@ builder.Services.AddHttpClient("API", client => {
     client.DefaultRequestHeaders.Add("Accept", "application/json");
 
 });
-
+ 
  

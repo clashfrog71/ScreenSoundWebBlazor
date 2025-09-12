@@ -1,5 +1,25 @@
-﻿<h3>CardArtista</h3>
+﻿<MudCard>
+    <MudCardMedia Image="images/cardArtista.png"></MudCardMedia>
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h6">@Artista!.Nome</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+    <MudCardContent>
+        
+
+        
+
+
+        <MudText Typo="Typo.body2">@Artista!.Bio</MudText>
+    </MudCardContent>
+</MudCard>
+//Código omitido
 
 @code {
+    [Parameter]
+    public ArtistaResponse? Artista { get; set; }
 
 }
+
+//Código omitido

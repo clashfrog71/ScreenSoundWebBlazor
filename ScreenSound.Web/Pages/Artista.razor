@@ -1,4 +1,5 @@
 ﻿@page "/artista"
+@using ScreenSound.Modelos
 @using ScreenSound.Web.Response
 @using ScreenSound.Web.Services
 @inject ArtistaAPI artistaAPI
@@ -11,6 +12,14 @@
         <p>@a.Nome</p>
     }
 }
+<h3>Artistas</h3>
+@if (Artista is not null)
+{
+            @foreach (var artista in artistas)
+            {
+                <CardArtista Artista="artista" />
+            }
+        }
 
 @code{
     public string mensagem { get; set; } = "teste";

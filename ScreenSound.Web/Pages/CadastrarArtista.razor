@@ -26,3 +26,13 @@
 
     </MudForm>
 </MudPaper>
+@code {
+    private string nomeArtista;
+    private string biografiaArtista;
+    private async Task Cadastrar()
+    {
+        var request = new ArtistaRequest(nomeArtista, biografiaArtista);
+        await ArtistaAPI.CadastrarArtistaAsync(request);
+        NavigationManagerExtensions.NavigateTo(NavigationManager, "artista");
+    }
+}

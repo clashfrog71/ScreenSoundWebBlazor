@@ -16,6 +16,9 @@ namespace ScreenSound.Web.Services
             return await
                   httpClient.GetFromJsonAsync<ICollection<ArtistaResponse>>("artistas");
         }
-
+        public async Task DeletarArtistasAsync(int id)
+        {
+            await httpClient.DeleteAsync($"artistas/{id}");
+        }
     }
 }

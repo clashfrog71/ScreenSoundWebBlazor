@@ -20,6 +20,19 @@
                       Required="true"
                       RequiredError="Campo obrigatório." />
 
+        <MudImage Class="mt-4" src="@fileImage" />
+        <MudFileUpload T="IBrowserFile" Accept=".jpeg" FilesChanged="UploadFile">
+            <ButtonTemplate>
+                <MudButton HtmlTag="label"
+                           Variant="Variant.Filled"
+                           Color="Color.Primary"
+                           StartIcon="@Icons.Material.Filled.PhotoCamera"
+                           for="@context">
+                    Foto de Perfil
+                </MudButton>
+            </ButtonTemplate>
+        </MudFileUpload>
+
         <div class="d-flex align-center justify-space-between mt-4">
             <MudButton Variant="Variant.Filled"
                        @onclick="Cadastrar"
@@ -28,8 +41,6 @@
                 Cadastrar
             </MudButton>
         </div>
-
-        <MudCardMedia Image=@Imagem></MudCardMedia>
 
     </MudForm>
 </MudPaper>
@@ -61,5 +72,4 @@
         fileImage = $"data:{format};base64,{imageUpload}";
         fotoPerfil = imageUpload;
     }
-
-}
+ }

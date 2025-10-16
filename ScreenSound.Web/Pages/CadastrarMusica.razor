@@ -49,4 +49,16 @@
 </MudPaper>
 @code {
 
+    private int AnoLancamento;
+    private string? nome;
+
+
+
+    private ICollection<ArtistaResponse> artistas;
+    private ICollection<GeneroResponse> generos;
+    protected override async Task OnInitializedAsync()
+    {
+        artistas = await artistaAPI.ListarArtistas();
+        generos = await artistaAPI.ListarGeneros();
+    }
 }

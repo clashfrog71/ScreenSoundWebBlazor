@@ -17,6 +17,10 @@ public class ScreenSoundContext: DbContext
 
     private string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ScreenSoundV0;Integrated Security=True;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
+    public ScreenSoundContext()
+    {
+        
+    }
     public ScreenSoundContext(DbContextOptions options) : base(options)
     {
 
@@ -35,6 +39,7 @@ public class ScreenSoundContext: DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Musica>()
             .HasMany(c => c.Generos)
             .WithMany(c => c.Musicas);

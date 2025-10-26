@@ -8,4 +8,5 @@ using System.Threading.Tasks;
 namespace ScreenSound.Shared.Dados.Modelos;
 public class PerfilDeAcesso : IdentityRole<int>
 {
+
 }

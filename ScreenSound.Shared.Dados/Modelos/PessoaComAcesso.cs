@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ScreenSound.Shared.Dados.Modelos;
-public class PerfilDeAcesso : IdentityRole<int>
+public class PessoaComAcesso : IdentityUser<int>
 {
-
 }

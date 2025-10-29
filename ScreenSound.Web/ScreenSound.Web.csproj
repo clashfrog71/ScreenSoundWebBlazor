@@ -7,23 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.4" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.0" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.3.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="9.0.10" />
-    <PackageReference Include="Microsoft.Graph" Version="5.94.0" />
     <PackageReference Include="MudBlazor" Version="6.11.1" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\images\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\ScreenSound.Shared.Modelos\ScreenSound.Shared.Modelos.csproj" />
-	  <ProjectReference Include="..\ScreenSound.Shared.Dados\ScreenSound.Shared.Dados.csproj" />
   </ItemGroup>
 
 </Project>

@@ -44,6 +44,8 @@ app.UseStaticFiles();
 app.AddEndPointsArtistas();
 app.AddEndPointsMusicas();
 app.AddEndPointGeneros();
+app.UseAuthorization();
+
 
 app.UseSwagger();
 app.UseSwaggerUI();

@@ -9,7 +9,7 @@ public class AuthAPI(IHttpClientFactory httpClientFactory)
     public async Task<AuthResponse> LoginAsync(string email, string senha)
     {
         var Response = await _httpClient.PostAsJsonAsync("/auth/login", new { email, senha });
-        if(Response.IsSuccessStatusCode)
+        if (Response.IsSuccessStatusCode)
         {
             return new AuthResponse
             {
@@ -17,14 +17,13 @@ public class AuthAPI(IHttpClientFactory httpClientFactory)
                 Erros = Array.Empty<string>()
             };
         }
-        else
+
+
+        return new AuthResponse
         {
-            var erros = await Response.Content.ReadFromJsonAsync<string[]>() ?? Array.Empty<string>();
-            return new AuthResponse
-            {
-                Sucesso = false,
-                Erros = erros
-            };
-        }
+            Sucesso = false,
+            Erros = ["senha incoreta"]
+        };
+
     }
 }

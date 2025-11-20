@@ -10,22 +10,29 @@ public class AuthAPI(IHttpClientFactory httpClientFactory) : AuthenticationState
 {
     private readonly HttpClient _httpClient = httpClientFactory.CreateClient("API");
 
-    public override async Task<AuthenticationState> GetAuthenticationStateAsync()
+    public override Task<AuthenticationState> GetAuthenticationStateAsync()
     {
         var pessoa = new ClaimsPrincipal();
-        var info = _httpClient.GetFromJsonAsync<pessoaAutenticada>("auth/manage/info");
+        var response = await _httpClient.GetAsync("auth/manage/info");
 
-        if(info is not null)
+        if (response.IsSuccessStatusCode)
         {
-            Claim[] dados = [
+            var info = await response.Content.ReadFromJsonAsync<InfoPessoaResponse>();
+            Claim[] dados =
+            [
                 new Claim(ClaimTypes.Name, info.Email),
                 new Claim(ClaimTypes.Email, info.Email)
-                ];
+            ];
 
             var identity = new ClaimsIdentity(dados, "Cookies");
             pessoa = new ClaimsPrincipal(identity);
+            autenticado = true;
         }
+
+        return new AuthenticationState(pessoa);
     }
+
+     
 
     public async Task<AuthResponse> LoginAsync(string email, string senha)
     {

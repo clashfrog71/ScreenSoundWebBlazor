@@ -24,7 +24,8 @@ public class AuthAPI(IHttpClientFactory httpClientFactory) : AuthenticationState
                 new Claim(ClaimTypes.Email, info.Email)
             ];
 
-            var identity = new ClaimsIdentity(dados, "Cookies");
+            var identity = new ClaimsIdentity(dados, "" +
+                "Cookies");
             pessoa = new ClaimsPrincipal(identity);
             autenticado = true;
         }

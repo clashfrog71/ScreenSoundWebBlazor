@@ -6,12 +6,15 @@ using System.Security.Claims;
 
 namespace ScreenSound.Web.Services;
 
-public class AuthAPI(IHttpClientFactory httpClientFactory) : AuthenticationStateProvider
+public class AuthAPI(IHttpClientFactory httpClientFactory, bool autenticado) : AuthenticationStateProvider
 {
     private readonly HttpClient _httpClient = httpClientFactory.CreateClient("API");
+    bool autenticado = false;
 
     public override Task<AuthenticationState> GetAuthenticationStateAsync()
+
     {
+        autenticado = false;
         var pessoa = new ClaimsPrincipal();
         var response = await _httpClient.GetAsync("auth/manage/info");
 
@@ -33,7 +36,7 @@ public class AuthAPI(IHttpClientFactory httpClientFactory) : AuthenticationState
         return new AuthenticationState(pessoa);
     }
 
-     
+
 
     public async Task<AuthResponse> LoginAsync(string email, string senha)
     {
@@ -54,5 +57,15 @@ public class AuthAPI(IHttpClientFactory httpClientFactory) : AuthenticationState
             Erros = ["senha incoreta"]
         };
 
+    }
+    public async Task LogoutAsync()
+    {
+        await _httpClient.PostAsync("/auth/logout", null);
+        NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
+    }
+    public async Task<bool> VerificaAutenticado()
+    {
+        await GetAuthenticationStateAsync();
+        return autenticado;
     }
 }

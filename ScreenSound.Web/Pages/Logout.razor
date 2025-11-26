@@ -1,5 +1,9 @@
 ﻿<h3>Logout</h3>
-
+@inject AuthAPI authAPI
 @code {
-
+    protected override async Task OnInitializedAsync()
+    {
+        await authAPI.LogoutAsync();
+        return base.OnInitializedAsync();
+    }
 }

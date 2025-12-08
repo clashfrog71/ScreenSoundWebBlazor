@@ -18,6 +18,7 @@ public class ScreenSoundContext: IdentityDbContext<PessoaComAcesso, PerfilDeAces
     public DbSet<Genero> Generos { get; set; }
     public DbSet<AvalicaoArtista> ArtistaAvaliacao { get; set; }
 
+
     private string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ScreenSoundV0;Integrated Security=True;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
     public ScreenSoundContext()

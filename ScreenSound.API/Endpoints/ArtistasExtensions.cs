@@ -78,8 +78,12 @@ public static class ArtistasExtensions
             dal.Atualizar(artistaAAtualizar);
             return Results.Ok();
         });
+        groupBuilder.MapPost("avaliacao", ([FromBody] AvaliacaoArtistaRequest) =>
+        { });  
+
+        }
         #endregion
-    }
+    
 
     private static ICollection<ArtistaResponse> EntityListToResponseList(IEnumerable<Artista> listaDeArtistas)
     {

@@ -98,6 +98,7 @@ public static class ArtistasExtensions
             {
                 Dalartista.AdicionarNota(artistaRequest.nota, pessoa.Id);
             }
+
             else
             {
                 avaliacoes.Nota = artistaRequest.nota;

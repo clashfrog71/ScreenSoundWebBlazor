@@ -3,6 +3,7 @@ using ScreenSound.API.Requests;
 using ScreenSound.API.Response;
 using ScreenSound.Banco;
 using ScreenSound.Modelos;
+using ScreenSound.Shared.Dados.Modelos;
 
 namespace ScreenSound.API.Endpoints;
 
@@ -37,9 +38,9 @@ public static class ArtistasExtensions
 
         });
 
-        groupBuilder.MapPost("", async ([FromServices]IHostEnvironment env,[FromServices] DAL<Artista> dal, [FromBody] ArtistaRequest artistaRequest) =>
+        groupBuilder.MapPost("", async ([FromServices] IHostEnvironment env, [FromServices] DAL<Artista> dal, [FromBody] ArtistaRequest artistaRequest) =>
         {
-            
+
             var nome = artistaRequest.nome.Trim();
             var imagemArtista = DateTime.Now.ToString("ddMMyyyyhhss") + "." + nome + ".jpg";
 
@@ -56,7 +57,8 @@ public static class ArtistasExtensions
             return Results.Ok();
         });
 
-        groupBuilder.MapDelete("{id}", ([FromServices] DAL<Artista> dal, int id) => {
+        groupBuilder.MapDelete("{id}", ([FromServices] DAL<Artista> dal, int id) =>
+        {
             var artista = dal.RecuperarPor(a => a.Id == id);
             if (artista is null)
             {
@@ -67,23 +69,46 @@ public static class ArtistasExtensions
 
         });
 
-        groupBuilder.MapPut("", ([FromServices] DAL<Artista> dal, [FromBody] ArtistaRequestEdit artistaRequestEdit) => {
+        groupBuilder.MapPut("", ([FromServices] DAL<Artista> dal, [FromBody] ArtistaRequestEdit artistaRequestEdit) =>
+        {
             var artistaAAtualizar = dal.RecuperarPor(a => a.Id == artistaRequestEdit.Id);
             if (artistaAAtualizar is null)
             {
                 return Results.NotFound();
             }
             artistaAAtualizar.Nome = artistaRequestEdit.nome;
-            artistaAAtualizar.Bio = artistaRequestEdit.bio;        
+            artistaAAtualizar.Bio = artistaRequestEdit.bio;
             dal.Atualizar(artistaAAtualizar);
             return Results.Ok();
         });
-        groupBuilder.MapPost("avaliacao", ([FromBody] AvaliacaoArtistaRequest) =>
-        { });  
+        groupBuilder.MapPost("avaliacao", (
+            HttpContext context,
+            [FromServices] DAL<PessoaComAcesso> dalPessoa,
+            [FromServices] DAL<Artista> artista,
+            [FromBody] AvaliacaoArtistaRequest artistaRequest
+            ) =>
+        {
+            var Dalartista = artista.RecuperarPor(a => a.Id == artistaRequest.artistaId); if (Dalartista is null)
+            {
+                return Results.NotFound("Artista não encontrado");
+            }
+            var pessoa = dalPessoa.RecuperarPor(p => p.UserName == context.User.Identity!.Name); if (pessoa is null) { throw new Exception("Usuário não encontrado"); }
+            var avaliacoes = Dalartista.AvaliacoesArtista.FirstOrDefault(a => a.ArtistaID == Dalartista.Id && a.UsuarioID == pessoa.Id);
+            if (avaliacoes is null)
+            {
+                Dalartista.AdicionarNota(artistaRequest.nota, pessoa.Id);
+            }
+            else
+            {
+                avaliacoes.Nota = artistaRequest.nota;
+            }
+            artista.Atualizar(Dalartista);
+            return Results.Ok();
+        });
 
-        }
-        #endregion
-    
+    }
+    #endregion
+
 
     private static ICollection<ArtistaResponse> EntityListToResponseList(IEnumerable<Artista> listaDeArtistas)
     {
@@ -95,5 +120,5 @@ public static class ArtistasExtensions
         return new ArtistaResponse(artista.Id, artista.Nome, artista.Bio, artista.FotoPerfil);
     }
 
-  
+
 }

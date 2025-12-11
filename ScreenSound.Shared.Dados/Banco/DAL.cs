@@ -10,6 +10,7 @@ public class DAL<T> where T : class
 {
     private readonly ScreenSoundContext context;
 
+
     public DAL(ScreenSoundContext context)
     {
         this.context = context;

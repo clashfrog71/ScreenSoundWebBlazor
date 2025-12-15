@@ -105,6 +105,17 @@ public static class ArtistasExtensions
             artista.Atualizar(Dalartista);
             return Results.Ok();
         });
+        groupBuilder.MapGet("{id}/avaliacao", (
+            int id,
+            HttpContext context,
+            [FromServices] DAL < PessoaComAcesso > dalPessoa,
+            [FromServices] DAL < Artista > Dalartista
+            ) =>
+        {
+            var artista = Dalartista.RecuperarPor(a => a.Id == id) if (artista is null) { return Results.NotFound("Artista não encontrado"); }
+            var pessoa = dalPessoa.RecuperarPor(p => p.UserName == context.User.Identity!.Name); if (pessoa is null) { throw new Exception("Usuário não encontrado"); }
+            var avaliacao = artista.AvaliacoesArtista.FirstOrDefault(a => a.ArtistaID == artista.Id && a.UsuarioID == pessoa.Id); if (avaliacao is null) { return Results.Ok(new AvaliacaoArtistaResponse(id,0); }
+        });
 
     }
     #endregion

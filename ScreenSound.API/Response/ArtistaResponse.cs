@@ -1,3 +1,9 @@
-﻿namespace ScreenSound.API.Response;
+﻿using ScreenSound.Modelos;
 
-public record ArtistaResponse(int Id, string Nome, string Bio, string? FotoPerfil);
+namespace ScreenSound.API.Response;
+
+public record ArtistaResponse(int Id, string Nome, string Bio, string? FotoPerfil)
+{
+    public double? Classicacao {  get; set; }
+    
+}

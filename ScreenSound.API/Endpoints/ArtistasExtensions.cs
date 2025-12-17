@@ -128,8 +128,10 @@ public static class ArtistasExtensions
 
     private static ArtistaResponse EntityToResponse(Artista artista)
     {
-        return new ArtistaResponse(artista.Id, artista.Nome, artista.Bio, artista.FotoPerfil);
+        return new ArtistaResponse(artista.Id, artista.Nome, artista.Bio, artista.FotoPerfil)
+        {
+            Classicacao = artista.AvaliacoesArtista.Select(a => a.Nota).DefaultIfEmpty(0).Average()
+        };
     }
-
 
 }

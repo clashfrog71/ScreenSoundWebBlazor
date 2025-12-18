@@ -108,16 +108,20 @@ public static class ArtistasExtensions
         groupBuilder.MapGet("{id}/avaliacao", (
             int id,
             HttpContext context,
-            [FromServices] DAL < PessoaComAcesso > dalPessoa,
-            [FromServices] DAL < Artista > Dalartista
+            [FromServices] DAL<PessoaComAcesso> dalPessoa,
+            [FromServices] DAL<Artista> Dalartista
             ) =>
         {
-            var artista = Dalartista.RecuperarPor(a => a.Id == id) if (artista is null) { return Results.NotFound("Artista não encontrado"); }
-            var pessoa = dalPessoa.RecuperarPor(p => p.UserName == context.User.Identity!.Name); if (pessoa is null) { throw new Exception("Usuário não encontrado"); }
-            var avaliacao = artista.AvaliacoesArtista.FirstOrDefault(a => a.ArtistaID == artista.Id && a.UsuarioID == pessoa.Id); if (avaliacao is null) { return Results.Ok(new AvaliacaoArtistaResponse(id,0); }
-        });
+            var artista = Dalartista.RecuperarPor(a => a.Id == id); if (artista is null) { return Results.NotFound("Artista não encontrado"); }
 
+            var pessoa = dalPessoa.RecuperarPor(p => p.UserName == context.User.Identity!.Name); if (pessoa is null) { throw new Exception("Usuário não encontrado"); }
+
+            var avaliacao = artista.AvaliacoesArtista.FirstOrDefault(a => a.ArtistaID == artista.Id && a.UsuarioID == pessoa.Id); if (avaliacao is null) { return Results.Ok(new AvaliacaoArtistaResponse(id, 0)); }
+            return Results.Ok(new AvaliacaoArtistaResponse(id, avaliacao.Nota));
+        });
     }
+
+
     #endregion
 
 

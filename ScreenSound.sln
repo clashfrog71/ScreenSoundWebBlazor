@@ -9,21 +9,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScreenSound", "ScreenSound\
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScreenSound.API", "ScreenSound.API\ScreenSound.API.csproj", "{0A657BF5-D051-4CB4-8751-2622622969DF}"
-	ProjectSection(ProjectDependencies) = postProject
-		{05BA69B4-047C-451B-9092-017C3AFC3774} = {05BA69B4-047C-451B-9092-017C3AFC3774}
-		{A9CCE41C-6657-42BF-AED4-F3F578033037} = {A9CCE41C-6657-42BF-AED4-F3F578033037}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScreenSound.Shared.Modelos", "ScreenSound.Shared.Modelos\ScreenSound.Shared.Modelos.csproj", "{10819FD0-150C-4068-93B7-BCC56B5D5424}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScreenSound.Shared.Dados", "ScreenSound.Shared.Dados\ScreenSound.Shared.Dados.csproj", "{D739D1BF-7AAE-4F5B-A8CA-FA8773869DEB}"
-	ProjectSection(ProjectDependencies) = postProject
-		{05BA69B4-047C-451B-9092-017C3AFC3774} = {05BA69B4-047C-451B-9092-017C3AFC3774}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenSound.Web", "ScreenSound.Web\ScreenSound.Web.csproj", "{05BA69B4-047C-451B-9092-017C3AFC3774}"
 	ProjectSection(ProjectDependencies) = postProject
+		{0A657BF5-D051-4CB4-8751-2622622969DF} = {0A657BF5-D051-4CB4-8751-2622622969DF}
 		{10819FD0-150C-4068-93B7-BCC56B5D5424} = {10819FD0-150C-4068-93B7-BCC56B5D5424}
+		{D739D1BF-7AAE-4F5B-A8CA-FA8773869DEB} = {D739D1BF-7AAE-4F5B-A8CA-FA8773869DEB}
 	EndProjectSection
 EndProject
 Global
